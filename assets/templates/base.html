@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}gw{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<!--
+<nav class="navbar navbar-default CenterNav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/Games">LOGO</a>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#/logout">Wyloguj</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'Create' %}">Dodaj Gre</a>
+            <a href="/MyLibrary">Moje Gry</a>
+            Zalogowany jako {{ user.username }} <a href="/logout">Wyloguj</a>
+        {% else %}
+            <a href="/login">Zaloguj sie</a>
+            <a href="/Register">Zarejestruj sie</a>
+        {% endif %}
+    </div>
+</nav>
+-->
+<nav>
+    <div class="LeftPart">
+        <ul>
+            <li class="MainMenuItem"><a href="/Games">Strona Główna</a></li>
+            <li class="MainMenuItem">
+                <form>
+                    <input class="SearchForm" type="text" placeholder="szukaj ...">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="RightPart">
+       <ul>
+        {% if user.is_authenticated %}
+                   {% load staticfiles %}
+                    <li style="margin-right:20px;">
+                        <a href="/MyLibrary">
+                            <div style="display: flex;">
+                                <span style="margin-right:15px;">{{LibaryCount}}</span>
+                                <span><img class="menuIcon" src="{% static '/images/bookcase.png' %}"></span>
+                            </div>
+                        </a>          
+                    </li>
+                    <li style="margin-right:20px;">
+                        <a href="/WishList">
+                            <div style="display: flex;">
+                                <span style="margin-right:15px;">54</span>
+                                <span><img class="menuIcon" src="{% static '/images/wishlist.png' %}"></span>
+                            </div>
+                        </a>     
+                    <li>
+                        <a>{{ user.username }}</a>
+                        <ul>
+                            <li><a>ustawienia Konta</a></li>
+                            <li><a href="/Create">Utwórz</a></li>
+                            <li><a href="/logout">wyloguj</a></li>
+                        </ul>
+                    </li>
+        {% else %}
+                <li class="MainMenuItem"><a href="/login">Zaloguj sie</a><li>
+                <li class="MainMenuItem"><a href="/Register">Zarejestruj sie</a><li>
+        {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div class="ContentDiv">
+    {% block body %}
+    {% endblock %}
+</div>
+</body>
+</html>

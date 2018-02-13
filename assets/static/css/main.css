@@ -1,0 +1,69 @@
+
+ .ContentDiv{
+        margin-top: 10px;
+        margin-left: 15%;
+        margin-right: 15%;
+        background-color: #ccd0cc;
+    }
+    .SearchForm{
+        margin: 10px;
+        padding: 2px;
+    }
+    body{
+        margin: 0px;
+    }
+    .MainMenuItem{
+        width: 200px;
+    }
+    nav{
+        padding-left: 15%;
+        padding-right: 15%;
+        background-color: grey;
+        height: 38px;
+    }
+    .RightPart{
+        float: right;
+        height:100px;
+    }
+    ul{
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+    ul li{
+        margin-left: 0px;
+        float: left;
+        width: 50px;
+        text-align: center;
+    }
+    ul li a {
+        text-decoration: none;
+        color: black;
+        display: block;
+        padding: 10px;
+    }
+    ul li ul li a{
+        color: white;
+    }
+    ul li a:hover{
+        
+        opacity: .5;
+    }
+    ul li ul li{
+        width: 200px;
+        margin-left: -150px;
+        background-color: black;
+        opacity: .8;
+        display: none;
+        
+    }
+    ul li:hover ul li{
+        display: block;
+    }
+    ul li ul li:hover{
+        opacity: 1;
+    }
+    .menuIcon{
+        width: 20px;
+        height: 20px;
+    }

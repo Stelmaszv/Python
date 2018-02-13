@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% block title %}{{ Game.name }}{% endblock %}
+{% block body %}
+<br>
+       {{Game.name}}<br>
+       {{Game.genere}}
+       {% if user.is_authenticated %}
+              <br>
+              <img src="{{Game.cover.url}}">
+              <br>
+                {{Game.Platform.id}}
+              <br>
+             {% if Inlabrary %}
+                     <a href="/MyLibrary"> W bibliotece</a>
+             {% else %}
+                     <a href="/LibraryAdd/{{Game.id}}">Dodaj</a>
+             {% endif %}
+    `         <br>
+              <a href="/Edit/{{Game.id}}">Edytuj</a>
+              <br>
+              <a href="/Dalete/{{Game.id}}"> usuń</a><br>
+       {% endif %}
+{% endblock %}
