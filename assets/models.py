@@ -16,6 +16,4 @@ class Game(models.Model):
         return self.name
 class MyLibrary(models.Model):
     user = models.ForeignKey( User, models.SET_NULL,blank=True,null=True,)
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.game.name
+    games = models.ManyToManyField(Game)

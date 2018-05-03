@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block title %}Moje gry{% endblock %}
+{% block body %}
+    <h2>Moje Gry</h2>
+    <table>
+    {% for item in object_list %}
+        {%for game in  item.games.all%}
+        <tr>
+            <td><a href="{% url 'ShowGame' game.id %}">{{game.name}}</a></td>
+            <td><a href="{% url 'ItemRemuveAction' game.id %}">usuń</a></td>
+        </tr>
+        {% endfor%}
+    {% endfor%}
+    </table>
+{% endblock %}

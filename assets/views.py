@@ -8,8 +8,19 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.models import Permission, User
 from django.db import IntegrityError
-
+from django import forms
+from django.views.generic import ListView, DetailView
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+class GameList(ListView):
+    model=Game
+class ShowGameView(DetailView):
+    model=Game
+class LiberyList(ListView):
+    model=MyLibrary
+    def Get(self):
+        print('dqd')
+class UserDetailView(DetailView):
+    model=User
 def index(request):
     Games = Game.objects.all()
     Platforms=Platform.objects.all()
@@ -21,13 +32,8 @@ def ShowGame(request,Game_id):
         Games = Game.objects.get(pk=Game_id)
     except Games.DoestNotExist:
         raise Http404("Wybrna Gra nie istnienie ")
-    Inlabrary= 0
-    game=MyLibrary.objects.filter(game=Game_id)
-    if game:
-        Inlabrary=1
     context = {
-        'Game'     :Games,
-        'Inlabrary':Inlabrary,
+        'Game':Games,
     }
     return render(request,'ShowGame.html',context)
 def Create(request):
@@ -50,10 +56,12 @@ def EditGame(request,Game_id):
     except Games.DoestNotExist:
         raise Http404("Wybrna Gra nie istnienie ")
     form = GameForm(request.POST or None, request.FILES or None)
+
     context = {
         'Game': Games,
         'form': form
     }
+    
     if form.is_valid():
         context = {
             'Game': Games,
@@ -106,23 +114,25 @@ def loginUser(request):
                 login(request, user)
                 return redirect('/')
             else:
-                return render(request, 'login.html', {'error_message': 'Your account has been disabled'})
+                return render(request, 'login.html', {'error_message': 'Twoje konto zostało zbanowane na ktutek naruszania regulamiunu'})
         else:
-            return render(request, 'login.html', {'error_message': 'Invalid login'})
+            return render(request, 'login.html', {'error_message': 'Nie poprawny login lub hasło'})
     return render(request, 'login.html')
 def MyLibraryView(request):
-    Library = MyLibrary.objects.filter(user=request.user)
+    libary=MyLibrary.objects.filter(user=request.user)
     context = {
-        'Library': Library
+        'Library': libary
     }
     return render(request, 'library.html',context)
 def MyLibraryAction(request,Game_id):
-    ML=MyLibrary()
-    ML.game=get_object_or_404(Game, pk=Game_id)
-    ML.user=request.user
-    ML.save()
+    game = Game.objects.get(pk=Game_id)
+    libary = MyLibrary.objects.get(user=request.user)
+    for Gamelop in libary.games.all():
+        if Gamelop != game:
+            libary.games.add(game)
     return redirect('/MyLibrary')
 def ItemRemuveAction(request,Game_id):
-    game=get_object_or_404(MyLibrary, pk=Game_id)
-    game.delete()
+    game = Game.objects.get(pk=Game_id)
+    libary = MyLibrary.objects.get(user=request.user)
+    libary.games.remove(game)
     return redirect('/MyLibrary')

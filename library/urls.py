@@ -19,21 +19,21 @@ from django.conf.urls import include,url
 from assets import views
 from django.conf import settings
 from django.conf.urls.static import static
+from assets.views import GameList,ShowGameView,LiberyList,UserDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
-    url('Games', views.index, name='index'),
+    url(r'^$', GameList.as_view(), name='MainPage'),
     url('Create', views.Create, name='Create'),
     url('logout', views.logoutUser, name='logoutUser'),
     url('login', views.loginUser, name='loginUser'),
     url('Register', views.Register, name='Register'),
-    url('MyLibrary', views.MyLibraryView, name='MyLibraryView'),
+    url('MyLibrary',  LiberyList.as_view(), name='MyLibraryView'),
     url('LibraryAdd/(?P<Game_id>[-\w]+)/', views.MyLibraryAction, name='MyLibraryAction'),
     url('remowe/(?P<Game_id>[-\w]+)/', views.ItemRemuveAction, name='ItemRemuveAction'),
     url('Edit/(?P<Game_id>[-\w]+)/', views.EditGame, name='EditGame'),
-    url('Game/(?P<Game_id>[-\w]+)/', views.ShowGame, name='ShowGame'),
-    url('Dalete/(?P<Game_id>[-\w]+)/', views.Dalete, name='Dalete'),
+    url('Game/(?P<pk>\d+)/$', ShowGameView.as_view(), name='ShowGame'),
+    url('Dalete/?P<id>\d+/$', views.Dalete, name='Dalete'),
 
 
 ]

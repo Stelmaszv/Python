@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% block title %}{{ Game.name }}{% endblock %}
+{% block body %}
+<br>
+{{self.IfInLibary}}
+               {{object.name}}<br>
+               <img src="{{object.cover.url}}" ><br>
+               <a href="{% url 'MyLibraryAction' object.id %}">Dodaj</a><br>
+               <a href="{% url 'EditGame' object.id %}">Edytuj</a><br>
+               <a href="{% url 'ItemRemuveAction' object.id %}">Usuń</a><br>
+{% endblock %}

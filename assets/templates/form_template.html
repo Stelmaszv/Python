@@ -1,7 +1,14 @@
+
 {% for field in form %}
-    <div>
-       {{ field.errors }}
-       {{ field.label_tag }}
-       {{ field }}
-    </div>
+  <div>
+           <div class="col-sm-2 LebalColor">
+            {{ field.label_tag }}
+           </div>
+           <div class="col-sm-2 InputText">
+            {{ field }}
+           </div>
+  </div>
+   <div class="col-sm-offset-2 col-sm-10">
+            <span class="text-danger">{{ field.errors }}</span>
+   </div>
 {% endfor %}

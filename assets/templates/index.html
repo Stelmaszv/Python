@@ -1,33 +1,16 @@
+
 {% extends 'base.html'%}
 {% block title %}Gry{% endblock %}
 {% block body %}
-<div class="content">
-    <div class="left-menu-Section">
-        <div class="menu-left">
-           <div clas="HeadName">Platformy</div>
-           <div class="menu-left-Items">
+<br><br>
                {% for Platform in Platforms %}
-                   <div><a class="menu-left-Link" href="/Game/{{Platform.id}}">{{Platform.name}}</a></div>
+                    {{Platform.name}}<br>
                {% endfor%}
-           </div>
+                    <br>
+                {% for Game in Games %}
+                 <a  href="/Game/{{Game.id}}">{{Game.name}}</a><br>
+               {% endfor%}
+            </div>
         </div>
     </div>
-    <div class="Main-Content">
-       <h2>Gry</h2>
-       {% for Game in Games %}
-         <div><a  href="/Game/{{Game.id}}">{{Game.name}}</a></div>
-       {% endfor%}
-    </div>
-</div>
-
-  <!--
-   <h2>Gry</h2>
-   {% for Game in Games %}
-       <a href="/Game/{{Game.id}}">{{Game.name}}</a><br>
-   {% endfor%}
-   <h2>Platformy</h2>
-    {% for Platform in Platforms %}
-       <a href="/Game/{{Platform.id}}">{{Platform.name}}</a><br>
-   {% endfor%}
-   -->
 {% endblock %}

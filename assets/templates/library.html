@@ -3,8 +3,9 @@
 {% block body %}
     <h2>Moje Gry</h2>
     {% for item in Library %}
-        <a href="/Game/{{item.game.id}}">{{item}}</a>
-        <a href="/remowe/{{item.id}}">usuń</a>
-        <br>
+        {{item.games}}
+            {% for game in item.games_set.all %}
+                 {{game.name}}
+            {% endfor%}
     {% endfor%}
 {% endblock %}
